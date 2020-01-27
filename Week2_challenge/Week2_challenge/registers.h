@@ -70,6 +70,16 @@
 #define TCCR2	    	*((reg_type8_t)0x45)
 #define TCNT2	    	*((reg_type8_t)0x44)
 #define OCR2	    	*((reg_type8_t)0x43)
-#define ASSR *((reg_type8_t)0x42)
+#define ASSR            *((reg_type8_t)0x42)
+
+
+
+/* 
+*interrupts
+*/
+#define GICR	    	*((reg_type8_t)0x5B)
+#define MCUCR	    	*((reg_type8_t)0x55) 
+#define MCUCSR	    	*((reg_type8_t)0x54)
+
 #endif /* REGISTERS_H_ */
 

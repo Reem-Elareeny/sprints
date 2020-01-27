@@ -12,6 +12,8 @@
 //#include <avr/delay.h>
 #include "softwareDelay.h"
 
+extern uint8_t bTN1Pressed;
+
 typedef enum En_buttonId_t{
 	BTN_0,
 	BTN_1,
@@ -46,5 +48,9 @@ void pushButtonUpdate(void);
  *
  */
 En_buttonStatus_t pushButtonGetStatus(En_buttonId_t en_butotn_id);
+
+
+void pushButtonExternalInterruptEnable();
+
 
 #endif /* PUSHBUTTON_H_ */

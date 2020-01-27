@@ -6,7 +6,7 @@
 #define INT0_vect			__vector_1
 #define INT1_vect			__vector_2
 #define INT2_vect			__vector_3
-#define TIMER2_COMP_vect	__vector_4
+#define TIMER2_COMP_vector	__vector_4
 #define TIMER2_OVF_vector		__vector_5
 #define TIMER1_CAPT_vect	__vector_6
 #define TIMER1_COMPA_vect	__vector_7

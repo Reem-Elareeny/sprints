@@ -1,0 +1,9 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=004011B6
+eax=00000000 ebx=0062CC5C ecx=20018020 edx=00000000 esi=0062CC70 edi=00000000
+ebp=0062CC38 esp=0062CC10 program=C:\Reem\Projects\eclipse_avr_workspace\c_workspace\dataStructure\m.exe, pid 23932, thread main
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+0062CC38  004011B6 (00000001, 0062CC5C, 200280F0, 61009E40)
+0062CD08  61009EA2 (00000000, 0062CD64, 61008DC0, 00000000)
+End of stack trace

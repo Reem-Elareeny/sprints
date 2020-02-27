@@ -2,7 +2,7 @@
 #include "Test.h"
 #include <stdio.h>
 
-extern TMU_ConfigType TMU_Config ;
+extern TMU_ConfigType TMU_Config;
 
 void TMU_Init_Test(void)
 {
@@ -86,11 +86,11 @@ void TMU_DeInit_Test(void){
 	ERR = TMU_DeInit();
 	if (ERR == 0)
 	{
-		printf("TMU_DeInit Test Case 1 : Passed \n");
+		printf("TMU_DeInit Test Case 2 : Passed \n");
 	}
 	else
 	{
-		printf("TMU_DeInit Test Case 1 : Failed \n");
+		printf("TMU_DeInit Test Case 2 : Failed \n");
 	}
 	printf("\n");
 }
@@ -103,7 +103,7 @@ void TMU_Start_Timer_Test()
 	/*starting TMU without initialization 
 	expected output 203 which maps to module ID + module not initialized */
 
-	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000);
+	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	
 	if (ERR == 203)
 	{
@@ -120,7 +120,7 @@ void TMU_Start_Timer_Test()
 	
 	TMU_Config.Timer_Channel = TIMER_CH0;
 	TMU_Init();
-	ERR = TMU_Start_Timer(10,NULL,1000);
+	ERR = TMU_Start_Timer(10,NULL,1000,PERIODIC);
 	if (ERR == 201)
 	{
 		printf("TMU_Start_Timer Test Case 2 : Passed \n");
@@ -133,15 +133,15 @@ void TMU_Start_Timer_Test()
 	/* writing a valid code 
 	expected output 0 which maps to no error */
 	
-	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000);
+	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	
 	if (ERR == 0)
 	{
-		printf("TMU_Start_Timer Test Case 2 : Passed \n");
+		printf("TMU_Start_Timer Test Case 3 : Passed \n");
 	}
 	else
 	{
-		printf("TMU_Start_Timer Test Case 2 : Failed \n");
+		printf("TMU_Start_Timer Test Case 3 : Failed \n");
 	}
 	
 	/********** TEST CASE 4 ***********/
@@ -151,9 +151,9 @@ void TMU_Start_Timer_Test()
 	uint8_t u8_Iterator = 0;
 	for(u8_Iterator = 0 ; u8_Iterator<(BUFFER_SIZE-1) ; u8_Iterator++)
 	{
-		TMU_Start_Timer(10,TMU_Init_Test,1000);
+		TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	}
-	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000);
+	ERR = TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	if (ERR == 207)
 	{
 		printf("TMU_Start_Timer Test Case 4 : Passed \n");
@@ -176,7 +176,7 @@ void TMU_Stop_Timer_Test()
 	
 	TMU_Config.Timer_Channel = TIMER_CH0;
 	TMU_Init();
-	TMU_Start_Timer(10,TMU_Init_Test,1000);
+	TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	ERR = TMU_Stop_Timer(20);
 	
 	if (ERR == 202)
@@ -244,7 +244,7 @@ void TMU_Dispatch_Test()
 	/* writing a valid code 
 	expected output 0 which maps to no error */
 	
-	TMU_Start_Timer(10,TMU_Init_Test,1000);
+	TMU_Start_Timer(10,TMU_Init_Test,1000,PERIODIC);
 	ERR = TMU_Dispatch();
 	if (ERR == 0)
 	{

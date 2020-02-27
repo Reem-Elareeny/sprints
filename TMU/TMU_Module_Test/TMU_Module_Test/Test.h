@@ -2,7 +2,7 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include "TMU_Config.h"
+#include "Services/TMU_Config.h"
 
 /**
  * Description: Tests the TMU_Init function
@@ -38,7 +38,7 @@ void TMU_DeInit_Test(void);
  *
  *				2-passing a null pointer as the function pointer
  *				expected output 201 which maps to module ID + NULL pointer error
- *				
+ *
  *				3- writing a valid code
  *				expected output 0 which maps to no error
  *
@@ -54,7 +54,7 @@ void TMU_Start_Timer_Test(void);
  *				1- stopping a task that's not started (does not exist in the buffer)
  *				expected output 202 which maps to module ID + invalid parameter error
  *
- *				
+ *
  *				2- writing a valid code (stopping a task that exists in the buffer)
  *				expected output 0 which maps to no error
  *
@@ -70,7 +70,7 @@ void TMU_Stop_Timer_Test(void);
  *				2-dispatching before starting any task (buffer is empty)
  *				expected output 0 which maps to no error
  *
- *				3- writing a valid code 
+ *				3- writing a valid code
  *				expected output 0 which maps to no error
  *
  */

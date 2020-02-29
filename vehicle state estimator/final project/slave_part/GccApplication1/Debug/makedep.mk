@@ -6,8 +6,6 @@ gpio.c
 
 pushButton.c
 
-sevenSeg.c
-
 slave.c
 
 softwareDelay.c

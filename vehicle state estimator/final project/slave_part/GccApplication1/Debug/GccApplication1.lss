@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00000d02  00000000  00000000  000035f8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000012b3  00000000  00000000  000042fa  2**0
+  8 .debug_line   000012b7  00000000  00000000  000042fa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000005d4  00000000  00000000  000055b0  2**2
+  9 .debug_frame  000005d4  00000000  00000000  000055b4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001012  00000000  00000000  00005b84  2**0
+ 10 .debug_str    00001022  00000000  00000000  00005b88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001dca  00000000  00000000  00006b96  2**0
+ 11 .debug_loc    00001dca  00000000  00000000  00006baa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000198  00000000  00000000  00008960  2**0
+ 12 .debug_ranges 00000198  00000000  00000000  00008974  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -389,7 +389,7 @@ static volatile uint16_t over_flow=0;
 uint8_t speed = 0,timer = 0,timer_counter = 0, distance = 0;
 uint8_t * str[50];
 	
-	int main (){
+	int main (){		
  1f4:	cf 93       	push	r28
  1f6:	df 93       	push	r29
  1f8:	cd b7       	in	r28, 0x3d	; 61
@@ -400,9 +400,6 @@ uint8_t * str[50];
  202:	de bf       	out	0x3e, r29	; 62
  204:	0f be       	out	0x3f, r0	; 63
  206:	cd bf       	out	0x3d, r28	; 61
-// 		uint32_t distance =0,speed=0,speed_w=0,time_Count=0;
-// 		
-		
 		
 		SPI_SLAVE_INFO slave;
 		slave. spi_i=SPI_I_EN;
@@ -477,8 +474,8 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
          pushButtonInit(STOP);
  268:	81 e0       	ldi	r24, 0x01	; 1
  26a:	0e 94 a4 00 	call	0x148	; 0x148 <pushButtonInit>
-// 		                  }
 		while (pushButtonGetStatus(STOP)==Released){
+			
 			if(spi_flag == 1){
 				spi_flag = 0;
 				speed = re_slave();
@@ -528,7 +525,7 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
  2a2:	df 2e       	mov	r13, r31
  2a4:	f0 2d       	mov	r31, r0
          pushButtonInit(STOP);
-	   //sevenSegWrite(SEG_0,1);
+	   
 	   
 	   while(1){
 		   
@@ -560,13 +557,10 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
  2d2:	8c e6       	ldi	r24, 0x6C	; 108
  2d4:	90 e0       	ldi	r25, 0x00	; 0
  2d6:	0e 94 04 03 	call	0x608	; 0x608 <UART_Write_String>
-// 		   speed= re_slave();
-// 		   
-// 	  sprintf(str , "  received speed:  %d" , speed);
-// 			   UART_Write_String(str);
-// 		                  }
+
 		while (pushButtonGetStatus(STOP)==Released){
  2da:	42 c0       	rjmp	.+132    	; 0x360 <main+0x16c>
+			
 			if(spi_flag == 1){
  2dc:	80 91 c0 00 	lds	r24, 0x00C0	; 0x8000c0 <spi_flag>
  2e0:	81 30       	cpi	r24, 0x01	; 1
@@ -635,11 +629,11 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
  356:	80 91 be 00 	lds	r24, 0x00BE	; 0x8000be <timer>
  35a:	8f 5f       	subi	r24, 0xFF	; 255
  35c:	80 93 be 00 	sts	0x00BE, r24	; 0x8000be <timer>
-// 		   speed= re_slave();
-// 		   
-// 	  sprintf(str , "  received speed:  %d" , speed);
-// 			   UART_Write_String(str);
-// 		                  }
+	  UART_Write('\n');
+	  UART_Write('\r');
+						
+	  UART_Write_String((uint8_t*)" starting ...");
+
 		while (pushButtonGetStatus(STOP)==Released){
  360:	81 e0       	ldi	r24, 0x01	; 1
  362:	0e 94 c4 00 	call	0x188	; 0x188 <pushButtonGetStatus>
@@ -906,7 +900,7 @@ uint8_t timer0Read(void){
  4f0:	83 bf       	out	0x33, r24	; 51
  4f2:	22 bf       	out	0x32, r18	; 50
  4f4:	0c bf       	out	0x3c, r16	; 60
- 4f6:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__data_start>
+ 4f6:	40 93 60 00 	sts	0x0060, r20	; 0x800060 <__DATA_REGION_ORIGIN__>
  4fa:	89 b7       	in	r24, 0x39	; 57
  4fc:	8e 29       	or	r24, r14
  4fe:	89 bf       	out	0x39, r24	; 57
@@ -929,7 +923,7 @@ uint8_t timer0Read(void){
 void timer0Start(void){
 	TCCR0|=prescaler_0;
  514:	93 b7       	in	r25, 0x33	; 51
- 516:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+ 516:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  51a:	89 2b       	or	r24, r25
  51c:	83 bf       	out	0x33, r24	; 51
  51e:	08 95       	ret

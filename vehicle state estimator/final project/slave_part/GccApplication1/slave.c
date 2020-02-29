@@ -8,7 +8,6 @@
 #include <util/delay.h>
 #include "UART.h"
 #include "spi.h"
-//#include "sevenSeg.h"
 #include "pushButton.h"	
 #include "timers.h"	
 #include <stdio.h>	
@@ -19,12 +18,7 @@ static volatile uint16_t over_flow=0;
 uint8_t speed = 0,timer = 0,timer_counter = 0, distance = 0;
 uint8_t * str[50];
 	
-	int main (){
-		
-		
-// 		uint32_t distance =0,speed=0,speed_w=0,time_Count=0;
-// 		
-		
+	int main (){		
 		
 		SPI_SLAVE_INFO slave;
 		slave. spi_i=SPI_I_EN;
@@ -53,7 +47,7 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
 
          pushButtonInit(START);
          pushButtonInit(STOP);
-	   //sevenSegWrite(SEG_0,1);
+	   
 	   
 	   while(1){
 		   
@@ -66,17 +60,7 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
 	  UART_Write('\r');
 						
 	  UART_Write_String((uint8_t*)" starting ...");
-	// speed=1; 
-	  
-// 	   	if (spi_flag==1){	
-// 			   
-// 			   spi_flag = 0;  
-// 			    
-// 		   speed= re_slave();
-// 		   
-// 	  sprintf(str , "  received speed:  %d" , speed);
-// 			   UART_Write_String(str);
-// 		                  }
+
 		while (pushButtonGetStatus(STOP)==Released){
 			
 			if(spi_flag == 1){
@@ -130,11 +114,6 @@ timer0Init(T0_NORMAL_MODE,T0_OC0_DIS,T0_PRESCALER_1024,0x00,0x00,T0_POLLING);
 			
 			return 0;
 		}
-
-
-// ISR(TIMER0_OVF_vect	){
-// 	over_flow++;
-// }
 
 
 	

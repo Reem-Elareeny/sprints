@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00000d4c  00000000  00000000  00002f6b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000012e6  00000000  00000000  00003cb7  2**0
+  8 .debug_line   000012e9  00000000  00000000  00003cb7  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000804  00000000  00000000  00004fa0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001073  00000000  00000000  000057a4  2**0
+ 10 .debug_str    00001083  00000000  00000000  000057a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000230e  00000000  00000000  00006817  2**0
+ 11 .debug_loc    0000230e  00000000  00000000  00006827  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000001d0  00000000  00000000  00008b25  2**0
+ 12 .debug_ranges 000001d0  00000000  00000000  00008b35  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -295,7 +295,7 @@ uint8_t gpioPinRead(uint8_t u8_port, uint8_t u8_pin){
 000001c0 <main>:
 
 
-
+volatile  char in_spee=0,flag=0;
 
 
 int main(){
@@ -390,10 +390,10 @@ int main(){
 	
 	
 	
-	//char tx_data,rx_data;
-	//sevenSegWrite(SEG_0,8);
+	
+	
 	while (flag!=1);
- 23c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_end>
+ 23c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
  240:	81 30       	cpi	r24, 0x01	; 1
  242:	e1 f7       	brne	.-8      	; 0x23c <main+0x7c>
  244:	8f e3       	ldi	r24, 0x3F	; 63
@@ -406,8 +406,7 @@ int main(){
 	tr_master(in_spee);
  250:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  254:	0e 94 27 02 	call	0x44e	; 0x44e <tr_master>
-	//sevenSegWrite(SEG_0,in_spee);
-	//tr_master(in_spee);
+
 	UART_Write((in_spee+48));
  258:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  25c:	80 5d       	subi	r24, 0xD0	; 208
@@ -438,7 +437,7 @@ int main(){
 					tr_master(in_spee);
  288:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  28c:	0e 94 27 02 	call	0x44e	; 0x44e <tr_master>
-					//sevenSegWrite(SEG_0,in_spee);
+					
 					UART_Write((in_spee+48));
  290:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  294:	80 5d       	subi	r24, 0xD0	; 208
@@ -468,7 +467,6 @@ int main(){
 					tr_master(in_spee);
  2c0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  2c4:	0e 94 27 02 	call	0x44e	; 0x44e <tr_master>
-				//	sevenSegWrite(SEG_0,in_spee);
 					UART_Write((in_spee+48));
  2c8:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  2cc:	80 5d       	subi	r24, 0xD0	; 208
@@ -491,15 +489,13 @@ int main(){
 		in_spee = UDR;
  2e0:	8c b1       	in	r24, 0x0c	; 12
  2e2:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <in_spee>
-		//UART_Write(in_spee);
-
 		in_spee-=48;
  2e6:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <in_spee>
  2ea:	80 53       	subi	r24, 0x30	; 48
  2ec:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <in_spee>
 		flag=1;
  2f0:	81 e0       	ldi	r24, 0x01	; 1
- 2f2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_end>
+ 2f2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 	}
  2f6:	8f 91       	pop	r24
  2f8:	0f 90       	pop	r0

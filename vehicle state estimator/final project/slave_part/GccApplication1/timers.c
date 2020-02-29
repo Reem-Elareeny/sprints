@@ -1,6 +1,12 @@
-﻿
-
-#include"timers.h"
+﻿ /*
+ * timers.c
+ *
+ * Created: 21/01/2020 03:34:27 م
+ *  Author: TOSHIBA
+ */ 
+ 
+ 
+ #include"timers.h"
 #include"interrupts.h"  
 	 #define F_CPU 16000000
 	

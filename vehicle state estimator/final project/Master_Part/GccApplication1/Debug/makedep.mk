@@ -8,8 +8,6 @@ master.c
 
 pushButton.c
 
-sevenSeg.c
-
 softwareDelay.c
 
 spi.c

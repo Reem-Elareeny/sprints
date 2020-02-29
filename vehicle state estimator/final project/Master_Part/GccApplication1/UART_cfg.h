@@ -1,4 +1,9 @@
-
+/*
+ * UART_cfg.h
+ *
+ * Created: 2/8/2020 5:44:45 PM
+ *  Author: Khaled Magdy
+ */ 
 
 
 #ifndef UART_CFG_H_
